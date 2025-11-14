@@ -5,5 +5,3 @@ A useful tool for exposing any vertical banding hiding in your OLED panel
 #### Description:
 TODO
 Should be about 750 words in length and multiple paragraphs explaining what the program and each file pertaining to it does
-
-asdf
