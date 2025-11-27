@@ -36,7 +36,7 @@ home.html is our html file for the default home page for our program that acts a
 
 info.html is our html file that simply displays information to educate the user on what vertical banding is and steps to take when it is spotted.
 
-tester.html is our html file that is the main heart of this program and will allow the user to cycle through 255 possible grayscale backgrounds in order to search for vertical banding on their OLED panel. There will be a number of intuitive controls that the user can use including the arrow keys, the - and + keys, and the scroll wheel on the mouse. Users can save a grayscale background value by pressing both the ctrl and s key at the same time. 
+tester.html is our html file that is the main heart of this program and will allow the user to cycle through 255 possible grayscale backgrounds in order to search for vertical banding on their OLED panel. There will be a number of intuitive controls that the user can use including the arrow keys, wasd keys, - + keys, and the scroll wheel on the mouse. Users can save a grayscale background value by pressing both the ctrl and s key at the same time. 
 
 saves.html is our html file that will display the grayscale background configurations that the user saved and allow them to quickly load a preset and jump straight to the corresponding grayscale background in the tester.html file. Users can also delete grayscale presets here as well. 
 
