@@ -32,7 +32,7 @@ register.html is our html file for the user to register their username and passw
 
 login.html is our html file for the user to login using their newly created username and password which will link also link them with the grayscale presets that the user saves.
 
-home.html is our html file for the default home page for our program that acts as a central hub containing all html pages that the user can navigate to.
+home.html is our html file for the default home page for our program that acts a introductory/about page as well as a central hub containing all html pages that the user can navigate to.
 
 info.html is our html file that simply displays information to educate the user on what vertical banding is and steps to take when it is spotted.
 
