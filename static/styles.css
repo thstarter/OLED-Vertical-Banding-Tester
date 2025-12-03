@@ -1,6 +1,32 @@
+/* Set a light gray background for the entire page */
+body {
+    background-color: #313131;  /* light gray */
+    color: #ffffff;                /* default text color */
+    font-family: Arial, sans-serif;  /* optional: make it look nicer */
+    font-size: 16px;               /* optional: set a base font size */
+}
+
+/* Background color for navbar */
+.bg-gray {
+    background-color: #313131 !important; /* light gray, !important ensures it overrides Bootstrap */
+}
+
+/* Navbar link color */
+.navbar .nav-link {
+    color: #b4b4b4 !important; /* gray / black */
+    font-weight: 500;          /* optional: make text slightly bolder */
+}
+
+/* Navbar link hover effect */
+.navbar .nav-link:hover {
+    color: #007fff !important; /* azure blue on hover */
+    text-decoration: underline; /* optional */
+}
+
 /* Size for brand */
 nav .navbar-brand
 {
+
     font-size: xx-large;
 }
 
@@ -20,4 +46,26 @@ nav .navbar-brand .yellow
 nav .navbar-brand .green
 {
     color: #2e944b;
+}
+
+/* Colors for brand */
+nav .navbar-brand .mint
+{
+    color: #76ffb4;
+}
+nav .navbar-brand .cyan
+{
+    color: #2ef8ff;
+}
+nav .navbar-brand .azure
+{
+    color: #2f8dff;
+}
+nav .navbar-brand .purple
+{
+    color: #983dff;
+}
+nav .navbar-brand .gray
+{
+    color: #6d6d6d;
 }
