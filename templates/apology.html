@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+    <div class="text-center">
+
+        <!-- Fun image -->
+        <img 
+            src="https://m.media-amazon.com/images/I/81CA3GV9sXL._AC_UF894,1000_QL80_.jpg"
+            alt="Sorry Board Game Image"
+            style="max-width: 300px; margin-bottom: 20px;"
+        >
+
+        <!-- Error code -->
+        <h1>{{ code }}</h1>
+
+        <!-- Message -->
+        <p>{{ message }}</p>
+
+    </div>
+{% endblock %}

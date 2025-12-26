@@ -1,0 +1,231 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Tester
+{% endblock %}
+
+{% block main %}
+<style>
+    /* styling to make tester area take up full screen and remove scrollbars */
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* styling for tester area */
+    #testerArea {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(0, 0, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 24px;
+        user-select: none;
+        transition: background-color 0.15s ease;
+    }
+
+    /* styling for on screen button controls for tester brightness (but we are not using this) */
+    #controls {
+        position: fixed;
+        bottom: 20px;
+        display: flex;
+        gap: 20px;
+    }
+
+    /* styling for screen position for tester brightness and controls text */
+    #valueDisplay {
+        text-align: center;
+    }   
+
+    /* styling for on screen text for tester opacity levels for fade in and fade out */
+    #valueDisplay span {
+    display: block;
+    transition: opacity 2s ease; /* smooth fade */
+    opacity: 1; /* start fully visible */
+    }
+
+    /* styling for on screen button controls for tester brightness (but we are not using this) */
+    button {
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+</style>
+
+<!-- Tester area brightness and controls text -->
+<div id="testerArea">
+    <div id="valueDisplay">
+        <span id="brightnessText">Brightness: 0</span>
+        <br>
+        <span id="controlsText">Use arrow keys, scroll wheel, or + − keys to cycle through backgrounds
+        <br>
+        <br>
+        Press f key to toggle on and off top navigation bar and go fullscreen
+        <br>
+        <br>
+        Press ctrl + s to save current grayscale preset
+        </span>
+    </div>
+</div>
+
+<!-- on screen buttons for controlling the grayscale background levels if you want-->
+<!--<div id="controls">
+    <button onclick="changeLevel(-1)">−</button>
+    <button onclick="changeLevel(1)">+</button>
+</div>-->
+
+<script>
+    // there are squiggly lines here because html doesn't understand jinja syntax. This is normal. You can use Better Jinja extension for VS Code to get rid of squiggly lines.
+    // get starting level from URL parameter if it exists, otherwise default to 0
+    let level = {{ start_level | default(0) }};
+
+    // update the grayscale background and display value
+    function updateBackground() {
+        const area = document.getElementById("testerArea");
+        const brightnessText = document.getElementById("brightnessText");
+        const controlsText = document.getElementById("controlsText");
+
+        // Set background grayscale preset and brightness text
+        area.style.backgroundColor = `rgb(${level}, ${level}, ${level})`;
+        brightnessText.textContent = `Brightness: ${level}`;
+
+        // Sets opacity of brightness and controls text all the way to 1 at the beginning of each refresh of the tester page
+        brightnessText.style.opacity = 1;
+        controlsText.style.opacity = 1;
+
+        // Fade opacity on brightness and controls text after 7 seconds
+        setTimeout(() => {
+            brightnessText.style.opacity = 0;
+            controlsText.style.opacity = 0;
+        }, 7000);
+    }
+
+    // change grayscale background level
+    function changeLevel(delta) {
+        level = Math.min(255, Math.max(0, level + delta));
+        updateBackground();
+    }
+
+    // alternative method: increment or decrement grayscale background by 1 using specific keyboard buttons
+    /*document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === "ArrowUp" || e.key === "+") changeLevel(1);
+        if (e.key === "ArrowLeft"  || e.key === "ArrowDown" || e.key === "-") changeLevel(-1);
+    });*/
+
+    // increment or decrement grayscale background by 1 using specific keyboard buttons. e.key stands for event key
+    document.addEventListener("keydown", (e) => {
+    // e.key means key is a property of the event object e
+    const key = e.key;
+    const increaseKeys = ["ArrowRight", "ArrowUp", "+"];
+    const decreaseKeys = ["ArrowLeft", "ArrowDown", "-"];
+    if (increaseKeys.includes(key)) {
+        changeLevel(1);
+    }
+    if (decreaseKeys.includes(key)) {
+        changeLevel(-1);
+    }
+    });
+
+    // increment or decrement grayscale background by 1 using scroll wheel on mouse
+    document.addEventListener("wheel", (e) => {
+        if (e.deltaY > 0) changeLevel(-1);
+        else changeLevel(1);
+    });
+
+    // initialize background which starts at 0 (black)
+    updateBackground();
+
+
+
+    // Toggle navigation bar vibility on and off with the f key and go full screen as well
+    document.addEventListener("keydown", async (e) => {
+    if (e.key.toLowerCase() !== "f") return;
+
+    // Make on screen text reappear and restart opacity timer
+    updateBackground();
+
+    // Get the navigation bar element
+    const nav = document.getElementById("topNavBar");
+
+    // Check if we are currently in fullscreen mode
+    const isFullscreen = document.fullscreenElement !== null;
+
+    // Enter fullscreen + hide navbar
+    if (!isFullscreen) {
+        nav.style.display = "none";
+        try {
+            await document.documentElement.requestFullscreen();
+        } catch (err) {
+            console.log("Fullscreen request failed:", err);
+        }
+    // Exit fullscreen + show navbar
+    } else {
+        nav.style.display = "flex"; // or "block" depending on your layout
+        document.exitFullscreen();
+    }
+    });
+
+
+    // Show "Preset saved!" or "Preset already saved!" message at the top of the screen for 2 seconds when saving presets with Ctrl+S
+    function showMessage(text, type) { // type is either "success" or "error"
+        const msg = document.createElement("div"); // Create message div
+        msg.textContent = text; // Set the message text 
+
+        // Styling for the "Preset saved!" or "Preset already saved!" message
+        msg.style.position = "fixed"; // fixed position
+        msg.style.top = "20px"; // position from the top
+        msg.style.left = "50%"; // center horizontally
+        msg.style.transform = "translateX(-50%)"; // center horizontally
+        msg.style.padding = "10px 20px"; // padding around text
+        msg.style.borderRadius = "8px"; // rounded corners
+        msg.style.fontSize = "16px"; // slightly smaller font size
+        msg.style.zIndex = "9999"; // make sure it's on top
+        msg.style.color = "white"; // Set text color to white
+
+        // Set background color based on message type; green for success, red for error
+        if (type === "success") {
+            msg.style.backgroundColor = "#00ff00"; // bootstrap green
+        } else {
+            msg.style.backgroundColor = "#ff0000"; // bootstrap red
+        }
+
+        // Append message to body
+        document.body.appendChild(msg);
+
+        // Remove message after 2 seconds
+        setTimeout(() => msg.remove(), 2000);
+    }
+
+    // Save preset when pressing ctrl+s
+    document.addEventListener("keydown", function(e) { 
+        if (e.key.toLowerCase() === "s" && e.ctrlKey) { // Check for ctrl+s
+            e.preventDefault(); // Prevent default browser save dialog
+
+            // Send POST request to save_preset function on app.py
+            fetch("/save_preset", { 
+                method: "POST", 
+                headers: {"Content-Type": "application/json"}, // Specify JSON content type
+                body: JSON.stringify({ level: level }) // Send current level as JSON
+            })
+            .then(res => res.json()) // Parse JSON response
+            .then(data => { // Handle response data
+                if (data.status === "success") { // If save was successful
+                    showMessage(data.message, "success"); // Show success message
+                } else if (data.status === "duplicate") { // If preset already exists
+                    showMessage(data.message, "error"); // Show error message
+                }
+            })
+            .catch(err => { // Handle network errors
+                showMessage("Need to be logged in to save.", "error"); // Show error message
+            });
+        }
+    });
+
+</script>
+{% endblock %}
