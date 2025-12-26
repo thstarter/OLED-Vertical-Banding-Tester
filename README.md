@@ -3,8 +3,6 @@ A tool for exposing any vertical banding hiding in your OLED panel
 
 #### Video Demo: https://www.youtube.com/watch?v=76sZr098TvU
 
-
-
 #### Description
 
 Welcome! OLED Vertical Banding Tester is a simple yet powerful tool that has been designed to help reveal vertical banding on your OLED panel to you by displaying pure grayscale backgrounds 
