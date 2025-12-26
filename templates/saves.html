@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Saves
+{% endblock %}
+
+{% block main %}
+
+    <ul>
+    {% for preset in presets %}
+        <li>
+            <a href="/tester?level={{ preset.r }}">
+                Brightness {{ preset.r }} 
+            </a>
+            <form action="/delete_preset/{{ preset.id }}" method="post" style="display:inline;">
+                <button type="submit"class="btn btn-sm btn-danger ms-2">
+                    x
+                </button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
