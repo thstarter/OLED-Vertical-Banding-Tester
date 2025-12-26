@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h1>Welcome!</h1>
+        <br>
+        <body>
+            <div>
+                OLED Vertical Banding Tester is a simple yet powerful tool that has been designed to help reveal vertical banding on your 
+                OLED panel to you by displaying pure grayscale backgrounds for your analysis. This program offers you the ability to cycle up to 
+                255 possible grayscale backgrounds ranging from total white to total black and everything in between with intuitive controls at your
+                fingertips. Along with grayscale testing, this program also gives you the ability to create an account and save grayscale presets 
+                for quick access and offers an information page that explores what vertical banding is and suggests steps that the user can take to 
+                help reduce the amount of vertical banding the user finds. May all of your OLED panel's vertical banding align in your favor.
+            </div>
+            <!-- adding a picture of a close up look at an oled panel -->
+            <img 
+                src="https://www.interelectronix.com/sites/default/files/blog/lcd-rgp-stripe-sub-pixel-pattern.jpg" 
+                alt="Picture of an OLED Display" 
+                style="max-width: 600px; margin-top: 20px;">
+        </body>
+{% endblock %}
