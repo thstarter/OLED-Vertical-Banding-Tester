@@ -3,8 +3,6 @@ A tool for exposing any vertical banding hiding in your OLED panel
 
 #### Video Demo: <URL HERE>
 
-
-
 #### Description
 
 Welcome! OLED Vertical Banding Tester is a simple yet powerful tool that has been designed to help reveal vertical banding on your OLED panel to you by displaying pure grayscale backgrounds 
@@ -43,5 +41,3 @@ saves.html is our html file that will display the grayscale background configura
 apology.html is our html file that will display an error message and picture to the user if the user submits invalid input with the program or performs an action that the program cannot process such as entering invalid user credentials on the register or login page.
 
 layout.html is our master template and contains recyclable code that is present through all of our html files so that they share the same layout, navigation bar, and styling. We are extending layout.html using jinja's {% extends %} syntax at the top of our html files.
-
-
