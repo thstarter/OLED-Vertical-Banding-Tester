@@ -1,54 +1,35 @@
-/* Set a light gray background for the entire page */
+/* Set gray background for pages */
 body {
-    background-color: #313131;  /* light gray */
+    background-color: #313131;  /* gray */
     color: #ffffff;                /* default text color */
-    font-family: Arial, sans-serif;  /* optional: make it look nicer */
-    font-size: 16px;               /* optional: set a base font size */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
 }
 
 /* Background color for navbar */
 .bg-gray {
-    background-color: #313131 !important; /* light gray, !important ensures it overrides Bootstrap */
+    background-color: #313131 !important; /* gray, !important ensures it overrides Bootstrap */
 }
 
-/* Navbar link color */
+/* Navbar links text color */
 .navbar .nav-link {
     color: #b4b4b4 !important; /* gray / black */
-    font-weight: 500;          /* optional: make text slightly bolder */
+    font-weight: 500;          /* make text slightly bolder */
 }
 
-/* Navbar link hover effect */
+/* Navbar links hover effect */
 .navbar .nav-link:hover {
-    color: #007fff !important; /* azure blue on hover */
-    text-decoration: underline; /* optional */
+    color: #8c00ff !important; /* purple on hover */
+    /* text-decoration: underline; */
 }
 
-/* Size for brand */
+/* Navbar brand (title) size */
 nav .navbar-brand
 {
-
     font-size: xx-large;
 }
 
-/* Colors for brand */
-nav .navbar-brand .blue
-{
-    color: #537fbe;
-}
-nav .navbar-brand .red
-{
-    color: #ea433b;
-}
-nav .navbar-brand .yellow
-{
-    color: #f5b82e;
-}
-nav .navbar-brand .green
-{
-    color: #2e944b;
-}
-
-/* Colors for brand */
+/* Colors for brand (OLED Vertical Banding Tester title) */
 nav .navbar-brand .mint
 {
     color: #76ffb4;
